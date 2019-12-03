@@ -19,6 +19,8 @@ render = cv2.imread(resource,filtro['gray'])
 render_blur = cv2.medianBlur(render,5)
 
 # algoritmos identificadores
+
+# Abastre la esencia de la imagen
 _variable = [150,255]
 ret1, binary = cv2.threshold(render, _variable[0] , _variable[1], cv2.THRESH_BINARY)
 ret2, binary_inv = cv2.threshold(render, _variable[0] , _variable[1], cv2.THRESH_BINARY_INV)
@@ -26,6 +28,11 @@ ret3, zero = cv2.threshold(render, _variable[0] , _variable[1], cv2.THRESH_TOZER
 adaptative_mean = cv2.adaptiveThreshold(render,255,cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY,11,2)
 adaptative_thresh = cv2.adaptiveThreshold(render_blur,255,cv2.ADAPTIVE_THRESH_GAUSSIAN_C,cv2.THRESH_BINARY,11,11)
 
+# busca contornos 
+objects,hierarchy = cv2.findContours(binary, cv2.RETR_EXTERNAL,
+      cv2.CHAIN_APPROX_NONE)
+
+print(count(object))
 
 # fin de los algoritmos identificadores
 
