@@ -3,23 +3,29 @@ import numpy as np
 
 Ip_Cam =  { 
         'left'    :   '192.168.100.20', 
-        'middle'  :   '192.168.100.17', 
+        'middle'  :   '19qeweqw2.168.100.17', 
         'right'   :   '192.168.100.19'
      }
 
-
+# Configurando entorno
 Streaming = cv2.VideoCapture('rtsp://'+Ip_Cam['middle']+'/stream1')
+cv2.namedWindow('Test', cv2.WINDOW_NORMAL)
 
-if !Streaming.isOpened() :
+# Capaturando Exepciones de trasmision de video
+if not Streaming.isOpened() :
     print('Camara no conectada')
-    return -1
+    exit(0)
 
+# Generando el Streaming capturado
 while True:
-  _ret,_frames= Streaming.read()
+    _ret,_frames= Streaming.read()
 
-  if _ret==True:
-    cv2.imshow('Video de la camara', _frame)
+    if _ret==True:
+        cv2.imshow('Test', _frames)
+
     if cv2.waitKey(1) & 0xFF == ord('s'):
-      break
+        break
+
 
 Streaming.release()
+cv2.destroyAllWindows();
