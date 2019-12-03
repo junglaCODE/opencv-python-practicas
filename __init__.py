@@ -17,7 +17,7 @@ if not Streaming.isOpened() :
     exit(0)
 
 # Generando el Streaming capturado
-while True:
+while Streaming.isOpened():
     _ret,_frames= Streaming.read()
 
     if _ret==True:
