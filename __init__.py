@@ -10,6 +10,10 @@ Ip_Cam =  {
 
 Streaming = cv2.VideoCapture('rtsp://'+Ip_Cam['middle']+'/stream1')
 
+if !Streaming.isOpened() :
+    print('Camara no conectada')
+    return -1
+
 while True:
   _ret,_frames= Streaming.read()
 
