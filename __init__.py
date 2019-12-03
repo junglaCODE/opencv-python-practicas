@@ -3,7 +3,7 @@ import numpy as np
 
 Ip_Cam =  { 
         'left'    :   '192.168.100.20', 
-        'middle'  :   '19qeweqw2.168.100.17', 
+        'middle'  :   '192.168.100.17', 
         'right'   :   '192.168.100.19'
      }
 
