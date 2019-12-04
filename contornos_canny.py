@@ -7,7 +7,7 @@ def saveAbstraccionObjects(name , data) :
     archivo.write(_data)
     archivo.close() 
 
-_img = 'silla3'
+_img = 'silla'
 _ext = '.jpg'
 _resource = 'assets/'+_img+_ext
 
