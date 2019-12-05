@@ -6,7 +6,7 @@ faceClassif = cv2.CascadeClassifier(_red_neuronal)
 cv2.namedWindow("Detectar Rostros", cv2.WINDOW_NORMAL)  
 
 #imagen estatica
-''' image = cv2.imread('assets/example_7.JPG')
+image = cv2.imread('assets/oficina.png')
 
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
@@ -14,7 +14,7 @@ faces = faceClassif.detectMultiScale(
 	gray,
 	scaleFactor=1.1,
 	minNeighbors=11,
-	minSize=(100,100),
+	minSize=(50,50),
 	maxSize=(400,400)
 )
 
@@ -26,14 +26,15 @@ cv2.imshow('Detectar Rostros',image)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 
-'''
 #video
+'''
 cap = cv2.VideoCapture('assets/video_5.mp4');
 
 while True:
 	ret,frame = cap.read()
 	gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-	render = cv2.
+	#render = cv2.Canny(gray, 100, 200 )
+
 	faces = faceClassif.detectMultiScale( 
 		gray ,
 		scaleFactor=1.1,
@@ -45,7 +46,8 @@ while True:
 	for (x,y,w,h) in faces:
 		cv2.rectangle(frame, (x,y),(x+w,y+h),(0,255,0),2)
 
-	cv2.imshow('Detectar Rostros',frame)
+	cv2.imshow('Detectar Rostros',gray)
 	
 	if cv2.waitKey(1) & 0xFF == ord('q'):
 		break
+'''
