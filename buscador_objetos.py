@@ -54,8 +54,9 @@ for _c in contours :
     approx = cv2.approxPolyDP(_c,epsilon,True)    
     x,y,w,h = cv2.boundingRect(approx)
 
-    print(len(approx))
+    print(len(approx)) #Modelo deterministico
 
+    # Aprendizaje apartir del modelo proporcionado
     if len(approx) < 4 :
         cv2.putText(img,'no puedo verlo', (x,y-5),1,1,(0,255,0),1)
 
@@ -70,7 +71,7 @@ for _c in contours :
 
     if len(approx) > 25 :
         cv2.putText(img,'Una persona ?', (x,y-5),1,1,(0,255,0),1)
-    
+
     cv2.drawContours(img , [approx], 0, (0,255,0),2)
 
 cv2.imshow('adivina quien es ? ',img)
