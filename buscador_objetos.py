@@ -11,7 +11,7 @@ def visualizarMomentosArea(contours) :
         cv2.waitKey(0)
 
 
-_resource = "assets/silla.jpg"
+_resource = "assets/silla3.jpg"
 
 if not path.exists(_resource) :
     print("recurso no encontrado")
@@ -44,12 +44,16 @@ contours , herarchy = cv2.findContours(
     )   
 
 for _c in contours :
+
     epsilon = 0.01*cv2.arcLength(_c,True)
-    approx = cv2.approxPolyDP(_c,epsilon,True)
-    
-    if approx >= 14 :
-        cv2.putText(image,'Silla', (x,y-5),1,1,(0,255,0),1)
-        x,y,w,h = cv2.boundingRect(approx)
+    approx = cv2.approxPolyDP(_c,epsilon,True)    
+    x,y,w,h = cv2.boundingRect(approx)
+
+    if len(approx) >= 14 :
+        print('es una silla')
+        cv2.drawContours(img , [approx], 0, (0,255,0),2)
+    else :
+        print('no se que sea')
         cv2.drawContours(img , [approx], 0, (0,255,0),2)
 
 # Representacion Salida
