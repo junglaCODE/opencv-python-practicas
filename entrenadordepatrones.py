@@ -4,14 +4,14 @@ import numpy as np
 from PIL import Image
 import pickle
 
-cascPath = "Cascades/haarcascade_frontalface_alt2.xml"
+cascPath = "redes_neuronales/haarcascade_frontalface_default.xml"
 faceCascade = cv2.CascadeClassifier(cascPath)
 
 #reconocimiento con opencv
 reconocimiento = cv2.face.LBPHFaceRecognizer_create()
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-image_dir = os.path.join(BASE_DIR,"images")
+image_dir = os.path.join(BASE_DIR,"assets/datasets")
 
 
 current_id = 0
@@ -23,21 +23,18 @@ for root, dirs, archivos in os.walk(image_dir):
     for archivo in archivos:
         if archivo.endswith("png") or archivo.endswith("jpg"):
             pathImagen = os.path.join(root,archivo)
-            etiqueta = os.path.basename(root).replace(" ", "-")#.lower()
-            #print(etiqueta,pathImagen)
+            etiqueta = os.path.basename(root).replace(" ", "-")
 
-            #Creando las etiquetas
+
             if not etiqueta in etiquetas_id:                
                 etiquetas_id[etiqueta] = current_id
                 current_id += 1            
             id_ = etiquetas_id[etiqueta]
-            #print(etiquetas_id)
 
             pil_image = Image.open(pathImagen).convert("L")
             tamanio = (550,550)
             imagenFinal = pil_image.resize(tamanio, Image.ANTIALIAS)
             image_array = np.array(pil_image,"uint8")
-            #print(image_array)
 
             rostros = faceCascade.detectMultiScale(image_array, 1.5, 5)
 
@@ -47,10 +44,8 @@ for root, dirs, archivos in os.walk(image_dir):
                 y_etiquetas.append(id_)
 
 
-#print(y_etiquetas)                
-#print(x_entrenamiento)
-with open("labels.pickle",'wb') as f:
+with open("redes_neuronales/modelo_seguridad_entrenado.pickle",'wb') as f:
     pickle.dump(etiquetas_id, f)
 
 reconocimiento.train(x_entrenamiento, np.array(y_etiquetas))
-reconocimiento.save("entrenamiento.yml")
+reconocimiento.save("redes_neuronales/modelo_seguridad.yml")
