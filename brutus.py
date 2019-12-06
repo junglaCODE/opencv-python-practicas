@@ -25,26 +25,23 @@ while web_cam.isOpened() :
         #print(x,y,w,h)
         roi_gray = grises[y:y+h, x:x+w]
         roi_color = marco[y:y+h, x:x+w]
-
+        x = x - 70 #suponiendo que es el casco
+        y = y - 170 #suponiendo que es el casco
+        w = w + 130 #suponiendo que es el casco
+        h = h + 180 # suponiendo que es el casco
         # reconocimiento
         id_, conf = reconocimiento.predict(roi_gray)
-        if conf >= 4  and conf < 85:
+        print(conf)
+        if conf >= 50  and conf < 70:
             #print(id_)
             #print(etiquetas[id_])           
             font = cv2.FONT_HERSHEY_SIMPLEX            
-
             nombre = etiquetas[id_]
-
-            if conf > 50:
-                #print(conf)
-                nombre = "Desconocido"
-
             color = (255,255,255)
             grosor = 2
             cv2.putText(marco, nombre, (x,y), font, 1, color, grosor, cv2.LINE_AA)
-
-        img_item = "my-image.png"
-        cv2.imwrite(img_item, roi_gray)
+            img_item = etiquetas[id_]+".png"
+            cv2.imwrite(img_item, roi_gray)
         
         cv2.rectangle(marco, (x, y), (x+w, y+h), (0, 255, 0), 2)
     

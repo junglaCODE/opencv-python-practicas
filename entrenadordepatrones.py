@@ -39,6 +39,10 @@ for root, dirs, archivos in os.walk(image_dir):
             rostros = faceCascade.detectMultiScale(image_array, 1.5, 5)
 
             for (x,y,w,h) in rostros:
+                #x = x - 70 #suponiendo que es el casco
+                #y = y - 170 #suponiendo que es el casco
+                #w = w + 130 #suponiendo que es el casco
+                #h = h + 180 # suponiendo que es el casco
                 roi = image_array[y:y+h, x:x+w]
                 x_entrenamiento.append(roi)
                 y_etiquetas.append(id_)

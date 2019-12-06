@@ -33,7 +33,7 @@ while  Streaming.isOpened() :
         cv2.circle(_frames,(x,y),10,(0,0,255))
         cv2.rectangle(_frames, (x,y), (x+w, y+h), (255,0,0), 4)
         count += 1
-        cv2.imwrite("assets/datasets/casco/hombre_"+str(count)+".jpg", negative[y:y+h, x:x+w])
+        cv2.imwrite("assets/datasets/concasco/hombre_"+str(count)+".jpg", negative[y:y+h, x:x+w])
 
     cv2.imshow("Capturas de imagenes", _frames)
 
