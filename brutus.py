@@ -1,7 +1,7 @@
 import cv2
 import pickle
 
-cascPath = "Cascades/haarcascade_frontalface_alt2.xml"
+cascPath = "redes_neuronales/haarcascade_frontalface_default.xml"
 faceCascade = cv2.CascadeClassifier(cascPath)
 
 reconocimiento = cv2.face.LBPHFaceRecognizer_create()
@@ -14,7 +14,7 @@ with open("redes_neuronales/modelo_seguridad_entrenado.pickle",'rb') as f:
 
 web_cam = cv2.VideoCapture('rtsp://192.168.100.17/stream1')
 
-while True:
+while web_cam.isOpened() :
     # Capture el marco
     ret, marco = web_cam.read()
     grises = cv2.cvtColor(marco, cv2.COLOR_BGR2GRAY)    
@@ -47,10 +47,6 @@ while True:
         cv2.imwrite(img_item, roi_gray)
         
         cv2.rectangle(marco, (x, y), (x+w, y+h), (0, 255, 0), 2)
-
-        rasgos = smileCascade.detectMultiScale(roi_gray)
-        for(ex,ey,ew,eh) in rasgos:
-            cv2.rectangle(roi_color, (ex, ey), (ex+ew, ey+eh), (0, 255, 0), 2)
     
     # Display resize del marco  
     marco_display = cv2.resize(marco, (1200, 650), interpolation = cv2.INTER_CUBIC)
