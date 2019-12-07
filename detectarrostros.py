@@ -28,7 +28,7 @@ cv2.destroyAllWindows()
 
 #video
 '''
-cap = cv2.VideoCapture('assets/video_5.mp4');
+cap = cv2.VideoCapture(0);
 
 while True:
 	ret,frame = cap.read()

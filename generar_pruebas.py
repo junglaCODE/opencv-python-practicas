@@ -9,7 +9,8 @@ Ip_Cam =  {
      }
 
 # Configurando entorno
-Streaming = cv2.VideoCapture('rtsp://'+Ip_Cam['middle']+'/stream1')
+#Streaming = cv2.VideoCapture('rtsp://'+Ip_Cam['middle']+'/stream1')
+Streaming = cv2.VideoCapture(0)
 
 cascPath = "redes_neuronales/haarcascade_frontalface_default.xml"
 faceCascade = cv2.CascadeClassifier(cascPath)
@@ -25,22 +26,23 @@ while  Streaming.isOpened() :
     rostro = faceCascade.detectMultiScale(negative, 1.5, 5)
     for(x,y,w,h) in rostro:
         
-        x = x - 70 #suponiendo que es el casco
-        y = y - 170 #suponiendo que es el casco
-        w = w + 130 #suponiendo que es el casco
-        h = h + 180 # suponiendo que es el casco
-        
+        '''
+        x = x - 10 #suponiendo que es el casco
+        y = y - 50 #suponiendo que es el casco
+        w = w + 10 #suponiendo que es el casco
+        h = h + 10 # suponiendo que es el casco
+        '''
         cv2.circle(_frames,(x,y),10,(0,0,255))
         cv2.rectangle(_frames, (x,y), (x+w, y+h), (255,0,0), 4)
         count += 1
-        cv2.imwrite("assets/datasets/concasco/hombre_"+str(count)+".jpg", negative[y:y+h, x:x+w])
+        cv2.imwrite("assets/datasets/sincasco/hombre_"+str(count)+".jpg", negative[y:y+h, x:x+w])
 
     cv2.imshow("Capturas de imagenes", _frames)
 
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
     
-    elif count >= 400:
+    elif count >= 500:
         break
     
 

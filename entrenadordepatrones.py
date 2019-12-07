@@ -13,7 +13,6 @@ reconocimiento = cv2.face.LBPHFaceRecognizer_create()
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 image_dir = os.path.join(BASE_DIR,"assets/datasets")
 
-
 current_id = 0
 etiquetas_id = {}
 y_etiquetas = []
@@ -25,17 +24,17 @@ for root, dirs, archivos in os.walk(image_dir):
             pathImagen = os.path.join(root,archivo)
             etiqueta = os.path.basename(root).replace(" ", "-")
 
-
             if not etiqueta in etiquetas_id:                
                 etiquetas_id[etiqueta] = current_id
-                current_id += 1            
-            id_ = etiquetas_id[etiqueta]
+                current_id += 1  
 
+   
+            id_ = etiquetas_id[etiqueta]
             pil_image = Image.open(pathImagen).convert("L")
             tamanio = (550,550)
             imagenFinal = pil_image.resize(tamanio, Image.ANTIALIAS)
             image_array = np.array(pil_image,"uint8")
-
+  
             rostros = faceCascade.detectMultiScale(image_array, 1.5, 5)
 
             for (x,y,w,h) in rostros:

@@ -12,7 +12,7 @@ with open("redes_neuronales/modelo_seguridad_entrenado.pickle",'rb') as f:
     pre_etiquetas = pickle.load(f)
     etiquetas = { v:k for k,v in pre_etiquetas.items()}
 
-web_cam = cv2.VideoCapture('rtsp://192.168.100.17/stream1')
+web_cam = cv2.VideoCapture(0)
 
 while web_cam.isOpened() :
     # Capture el marco
@@ -25,14 +25,15 @@ while web_cam.isOpened() :
         #print(x,y,w,h)
         roi_gray = grises[y:y+h, x:x+w]
         roi_color = marco[y:y+h, x:x+w]
-        x = x - 70 #suponiendo que es el casco
-        y = y - 170 #suponiendo que es el casco
-        w = w + 130 #suponiendo que es el casco
-        h = h + 180 # suponiendo que es el casco
+        
+        x = x - 20 #suponiendo que es el casco
+        y = y - 30 #suponiendo que es el casco
+        w = w + 10 #suponiendo que es el casco
+        h = h + 10 # suponiendo que es el casco
         # reconocimiento
         id_, conf = reconocimiento.predict(roi_gray)
         print(conf)
-        if conf >= 50  and conf < 70:
+        if conf >= 50  and conf <= 90:
             #print(id_)
             #print(etiquetas[id_])           
             font = cv2.FONT_HERSHEY_SIMPLEX            
